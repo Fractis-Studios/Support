@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Fractis Studios — Security Audit Report</title>
 <style>
 body{font-family:Segoe UI,Arial,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;line-height:1.6;background:#0d1117;color:#c9d1d9;}
@@ -14,63 +17,45 @@ strong{color:#f0f6fc;}
 </style>
 </head>
 <body>
-<script>
-if(sessionStorage.getItem('auth')!=='1'){
-  var p=prompt('Password required:');
-  if(p!=='HEEELP123@&=*'){ document.body.innerHTML='<h2 style="color:red;text-align:center;margin-top:40vh;">Access denied</h2>'; throw new Error('denied'); }
-  sessionStorage.setItem('auth','1');
-}
-</script>
+<script>if(prompt('Password required:')!=='HEEELP123@&=*'){document.documentElement.innerHTML='<body style="background:#0d1117;color:#f85149;font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;"><h2>Access denied</h2></body>';throw new Error('denied');}</script>
 <h1>Fractis Studios — Security Audit Report</h1>
 <p><em>Generated during investigation of a suspicious invoice email (INV160488).</em></p>
-
 <h2>Trigger</h2>
 <p>Suspicious invoice email (INV160488) received by Fractis Studios, purportedly from "Adam Ryder Brooker" sent from an obscure/tempmail address (ven200@libero.it), forwarding a fake invoice supposedly from finance@remit-payment.com (Cape Town, South Africa). Daleen forwarded the message to the investigator for review. The info@fractisstudios.com address appears only as the forwarding mailbox, not the original sender.</p>
-
 <h2>Email Forensics</h2>
 <ul>
 <li><strong>Authentication:</strong> DKIM=pass, DMARC=pass, SPF=pass for fractisstudios.com.</li>
-<li><strong>Sending infrastructure:</strong> Authenticated sender info@fractisstudios.com via Microsoft 365 (DB4PR08MB9262.eurprd08.prod.outlook.com), relayed through Hostinger SMTP (148.222.54.35).</li>
-<li><strong>Implication:</strong> Pass results reflect the forwarding relay through Fractis infrastructure, not necessarily a credential compromise of info@.</li>
-<li><strong>Content:</strong> Classic "overdue invoice" phishing. Third party finance@remit-payment.com is an unknown remittance-style domain. No prior history with remit-payment.com or ven200@libero.it.</li>
+<li><strong>Sending infrastructure:</strong> Authenticated sender info@fractisstudios.com via Microsoft 365, relayed through Hostinger SMTP.</li>
+<li><strong>Content:</strong> Classic "overdue invoice" phishing. No prior history with remit-payment.com or ven200@libero.it.</li>
 </ul>
-
-<h2>Website & DNS (Automated Check)</h2>
+<h2>Website & DNS</h2>
 <ul>
-<li>Site resolves and serves normally. HTTPS active. Cookie consent dialog present. Privacy/Terms/Cookie Policy linked in footer.</li>
-<li>No obvious defacement or injected content on homepage.</li>
+<li>Site resolves and serves normally. HTTPS active.</li>
 <li>DNS A: 88.222.223.48, 5.252.75.6. MX: mx1/mx2.hostinger.com. NS: ns1/ns2.dns-parking.com.</li>
-<li>SPF: v=spf1 include:_spf.mail.hostinger.com ~all. DKIM (hostingermail1._domainkey): present. DMARC: v=DMARC1; p=none.</li>
-<li>⚠️ DMARC policy is p=none (monitor only). Recommend upgrading to p=quarantine then p=reject.</li>
-<li>SPF uses ~all (soft fail). -all (hard fail) is stronger once mail flow confirmed.</li>
+<li>SPF: v=spf1 include:_spf.mail.hostinger.com ~all. DKIM present. DMARC: v=DMARC1; p=none (weak, upgrade recommended).</li>
 </ul>
-
-<h2>Subdomain & Exposed-Path Scan (Automated)</h2>
+<h2>Subdomain & Exposed-Path Scan</h2>
 <ul>
-<li>Subdomains resolving: www (cdn.hstgr.net), ftp (153.92.11.148). No others. No dangling CNAMEs / takeover candidates.</li>
-<li>Platform is WordPress. /wp-admin/ and /wp-login.php reachable (expected). /admin/ returns 200 — verify not unexpected panel.</li>
-<li>Sensitive files (.env, .git/config, phpinfo, config.php, backups, SQL dumps) return 403/404 — not exposed.</li>
-<li>security.txt not present (optional best practice).</li>
-<li>No directory listing or exposed source detected.</li>
+<li>Subdomains resolving: www, ftp. No dangling CNAMEs.</li>
+<li>Platform is WordPress. /wp-admin/ and /wp-login.php reachable. /admin/ returns 200.</li>
+<li>Sensitive files (.env, .git/config, phpinfo, backups, SQL dumps) return 403/404.</li>
+<li>security.txt not present.</li>
 </ul>
-
-<h2>Recommended Immediate Actions</h2>
+<h2>Recommended Actions</h2>
 <ol>
-<li>Reset passwords for info@ and any admin accounts; revoke active sessions/app passwords.</li>
+<li>Reset passwords; revoke sessions/app passwords.</li>
 <li>Enable 2FA on mailbox and hosting panel.</li>
-<li>Audit mailbox rules & forwarding; remove auto-forwards.</li>
-<li>Check Sent Items for unauthorized outbound messages.</li>
+<li>Audit mailbox rules & forwarding.</li>
+<li>Check Sent Items.</li>
 <li>Review Hostinger DNS & account activity logs.</li>
-<li>Scan endpoints of anyone with mailbox access for infostealer malware.</li>
-<li>Notify contacts the invoice email was not sent by Fractis Studios.</li>
-<li>Report finance@remit-payment.com / remit-payment.com as phishing.</li>
-<li>Keep WP core/plugins/themes updated; disable XML-RPC if unused; enforce 2FA on WP admin; install WAF; monitor wp-login brute force.</li>
-<li>Upgrade DMARC to quarantine/reject; consider SPF -all.</li>
+<li>Scan endpoints for infostealer malware.</li>
+<li>Notify contacts the invoice was not sent by Fractis Studios.</li>
+<li>Report finance@remit-payment.com as phishing.</li>
+<li>Keep WP updated; disable XML-RPC; enforce 2FA; install WAF.</li>
+<li>Upgrade DMARC to quarantine/reject.</li>
 </ol>
-
 <h2>Socials</h2>
-<p>Audit each linked social account for unauthorized posts, changed bios/links, new admins, suspicious DMs, connected third-party apps. Revoke unknown OAuth apps and rotate passwords + enable 2FA.</p>
-
+<p>Audit each linked social account for unauthorized posts, changed bios/links, new admins, suspicious DMs, connected OAuth apps. Revoke unknown apps, rotate passwords, enable 2FA.</p>
 <h2>Conclusion</h2>
 <p>Phishing originated externally via tempmail/obscure domain. No evidence of website defacement or data leak. Prioritize mailbox + hosting account hardening and DMARC upgrade.</p>
 </body>

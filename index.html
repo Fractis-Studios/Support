@@ -2,23 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Fractis Studios — Support Reports</title>
 <style>
 body{font-family:Segoe UI,Arial,sans-serif;max-width:700px;margin:2rem auto;padding:0 1rem;background:#0d1117;color:#c9d1d9;}
 h1{border-bottom:2px solid #30363d;padding-bottom:.3rem;color:#58a6ff;}
 ul{list-style:none;padding:0;} li{margin:.5rem 0;background:#161b22;padding:.8rem 1rem;border-radius:8px;border:1px solid #30363d;}
 a{color:#58a6ff;text-decoration:none;} a:hover{text-decoration:underline;}
-.locked{display:none;}
 </style>
 </head>
 <body>
-<script>
-if(sessionStorage.getItem('auth')!=='1'){
-  var p=prompt('Password required:');
-  if(p!=='HEEELP123@&=*'){ document.body.innerHTML='<h2 style="color:#f85149;text-align:center;margin-top:40vh;">Access denied</h2>'; throw new Error('denied'); }
-  sessionStorage.setItem('auth','1');
-}
-</script>
+<script>if(prompt('Password required:')!=='HEEELP123@&=*'){document.documentElement.innerHTML='<body style="background:#0d1117;color:#f85149;font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;"><h2>Access denied</h2></body>';throw new Error('denied');}</script>
 <h1>Fractis Studios — Support Reports</h1>
 <p>Select a report:</p>
 <ul>
