@@ -3,9 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Fractis Studios — Support Reports</title>
-<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:700px;margin:2rem auto;padding:0 1rem;} h1{border-bottom:2px solid #eee;padding-bottom:.3rem;} ul{list-style:none;padding:0;} li{margin:.5rem 0;} a{color:#1a73e8;text-decoration:none;} a:hover{text-decoration:underline;}</style>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;max-width:700px;margin:2rem auto;padding:0 1rem;background:#0d1117;color:#c9d1d9;}
+h1{border-bottom:2px solid #30363d;padding-bottom:.3rem;color:#58a6ff;}
+ul{list-style:none;padding:0;} li{margin:.5rem 0;background:#161b22;padding:.8rem 1rem;border-radius:8px;border:1px solid #30363d;}
+a{color:#58a6ff;text-decoration:none;} a:hover{text-decoration:underline;}
+.locked{display:none;}
+</style>
 </head>
 <body>
+<script>
+if(sessionStorage.getItem('auth')!=='1'){
+  var p=prompt('Password required:');
+  if(p!=='HEEELP123@&=*'){ document.body.innerHTML='<h2 style="color:#f85149;text-align:center;margin-top:40vh;">Access denied</h2>'; throw new Error('denied'); }
+  sessionStorage.setItem('auth','1');
+}
+</script>
 <h1>Fractis Studios — Support Reports</h1>
 <p>Select a report:</p>
 <ul>
