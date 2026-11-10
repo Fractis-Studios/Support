@@ -2,67 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Fractis Studios — Security Audit Report</title>
-<style>
-body{font-family:Segoe UI,Arial,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;line-height:1.6;color:#222;}
-h1,h2{color:#1a1a1a;border-bottom:2px solid #eee;padding-bottom:.3rem;}
-code{background:#f4f4f4;padding:2px 6px;border-radius:4px;}
-pre{background:#f4f4f4;padding:1rem;border-radius:8px;overflow:auto;}
-ul{padding-left:1.5rem;}
-</style>
+<title>Fractis Studios — Protected</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#111;color:#eee;} .box{background:#222;padding:2rem;border-radius:10px;text-align:center;} input{padding:.6rem;margin:.5rem;border:none;border-radius:4px;} button{padding:.6rem 1.2rem;border:none;border-radius:4px;background:#4caf50;color:#fff;cursor:pointer;}</style>
 </head>
 <body>
-<h1>Fractis Studios — Security Audit Report</h1>
-<p><em>Generated during investigation of a suspicious invoice email (INV160488).</em></p>
-
-<h2>Trigger</h2>
-<p>Suspicious invoice email (INV160488) received by Fractis Studios, purportedly from "Adam Ryder Brooker" sent from an obscure/tempmail address (ven200@libero.it), forwarding a fake invoice supposedly from finance@remit-payment.com (Cape Town, South Africa). Daleen forwarded the message to the investigator for review. The info@fractisstudios.com address appears only as the forwarding mailbox, not the original sender.</p>
-
-<h2>Email Forensics</h2>
-<ul>
-<li><strong>Authentication:</strong> DKIM=pass, DMARC=pass, SPF=pass for fractisstudios.com.</li>
-<li><strong>Sending infrastructure:</strong> Authenticated sender info@fractisstudios.com via Microsoft 365 (DB4PR08MB9262.eurprd08.prod.outlook.com), relayed through Hostinger SMTP (148.222.54.35).</li>
-<li><strong>Implication:</strong> Pass results reflect the forwarding relay through Fractis infrastructure, not necessarily a credential compromise of info@.</li>
-<li><strong>Content:</strong> Classic "overdue invoice" phishing. Third party finance@remit-payment.com is an unknown remittance-style domain. No prior history with remit-payment.com or ven200@libero.it.</li>
-</ul>
-
-<h2>Website & DNS (Automated Check)</h2>
-<ul>
-<li>Site resolves and serves normally. HTTPS active. Cookie consent dialog present. Privacy/Terms/Cookie Policy linked in footer.</li>
-<li>No obvious defacement or injected content on homepage.</li>
-<li>DNS A: 88.222.223.48, 5.252.75.6. MX: mx1/mx2.hostinger.com. NS: ns1/ns2.dns-parking.com.</li>
-<li>SPF: v=spf1 include:_spf.mail.hostinger.com ~all. DKIM (hostingermail1._domainkey): present. DMARC: v=DMARC1; p=none.</li>
-<li>⚠️ DMARC policy is p=none (monitor only). Recommend upgrading to p=quarantine then p=reject.</li>
-<li>SPF uses ~all (soft fail). -all (hard fail) is stronger once mail flow confirmed.</li>
-</ul>
-
-<h2>Subdomain & Exposed-Path Scan (Automated)</h2>
-<ul>
-<li>Subdomains resolving: www (cdn.hstgr.net), ftp (153.92.11.148). No others. No dangling CNAMEs / takeover candidates.</li>
-<li>Platform is WordPress. /wp-admin/ and /wp-login.php reachable (expected). /admin/ returns 200 — verify not unexpected panel.</li>
-<li>Sensitive files (.env, .git/config, phpinfo, config.php, backups, SQL dumps) return 403/404 — not exposed.</li>
-<li>security.txt not present (optional best practice).</li>
-<li>No directory listing or exposed source detected.</li>
-</ul>
-
-<h2>Recommended Immediate Actions</h2>
-<ol>
-<li>Reset passwords for info@ and any admin accounts; revoke active sessions/app passwords.</li>
-<li>Enable 2FA on mailbox and hosting panel.</li>
-<li>Audit mailbox rules & forwarding; remove auto-forwards.</li>
-<li>Check Sent Items for unauthorized outbound messages.</li>
-<li>Review Hostinger DNS & account activity logs.</li>
-<li>Scan endpoints of anyone with mailbox access for infostealer malware.</li>
-<li>Notify contacts the invoice email was not sent by Fractis Studios.</li>
-<li>Report finance@remit-payment.com / remit-payment.com as phishing.</li>
-<li>Keep WP core/plugins/themes updated; disable XML-RPC if unused; enforce 2FA on WP admin; install WAF; monitor wp-login brute force.</li>
-<li>Upgrade DMARC to quarantine/reject; consider SPF -all.</li>
-</ol>
-
-<h2>Socials</h2>
-<p>Audit each linked social account for unauthorized posts, changed bios/links, new admins, suspicious DMs, connected third-party apps. Revoke unknown OAuth apps and rotate passwords + enable 2FA.</p>
-
-<h2>Conclusion</h2>
-<p>Phishing originated externally via tempmail/obscure domain. No evidence of website defacement or data leak. Prioritize mailbox + hosting account hardening and DMARC upgrade.</p>
+<div class="box">
+<h2>Password Required</h2>
+<input type="password" id="pw" placeholder="Enter password">
+<br>
+<button onclick="check()">Unlock</button>
+<p id="msg" style="color:#f66;"></p>
+</div>
+<script>
+function check(){
+  if(document.getElementById('pw').value==="HEEELP123@&=*"){
+    sessionStorage.setItem('auth','1');
+    window.location.href='Report01/';
+  } else {
+    document.getElementById('msg').textContent='Incorrect password';
+  }
+}
+</script>
 </body>
 </html>

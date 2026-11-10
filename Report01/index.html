@@ -12,6 +12,13 @@ ul{padding-left:1.5rem;}
 </style>
 </head>
 <body>
+<script>
+if(sessionStorage.getItem('auth')!=='1'){
+  var p=prompt('Password required:');
+  if(p!=='HEEELP123@&=*'){ document.body.innerHTML='<h2 style="color:red;text-align:center;margin-top:40vh;">Access denied</h2>'; throw new Error('denied'); }
+  sessionStorage.setItem('auth','1');
+}
+</script>
 <h1>Fractis Studios — Security Audit Report</h1>
 <p><em>Generated during investigation of a suspicious invoice email (INV160488).</em></p>
 
