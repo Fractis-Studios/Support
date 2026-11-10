@@ -2,26 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Fractis Studios — Protected</title>
-<style>body{font-family:Segoe UI,Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;background:#111;color:#eee;} .box{background:#222;padding:2rem;border-radius:10px;text-align:center;} input{padding:.6rem;margin:.5rem;border:none;border-radius:4px;} button{padding:.6rem 1.2rem;border:none;border-radius:4px;background:#4caf50;color:#fff;cursor:pointer;}</style>
+<title>Fractis Studios — Support Reports</title>
+<style>body{font-family:Segoe UI,Arial,sans-serif;max-width:700px;margin:2rem auto;padding:0 1rem;} h1{border-bottom:2px solid #eee;padding-bottom:.3rem;} ul{list-style:none;padding:0;} li{margin:.5rem 0;} a{color:#1a73e8;text-decoration:none;} a:hover{text-decoration:underline;}</style>
 </head>
 <body>
-<div class="box">
-<h2>Password Required</h2>
-<input type="password" id="pw" placeholder="Enter password">
-<br>
-<button onclick="check()">Unlock</button>
-<p id="msg" style="color:#f66;"></p>
-</div>
-<script>
-function check(){
-  if(document.getElementById('pw').value==="HEEELP123@&=*"){
-    sessionStorage.setItem('auth','1');
-    window.location.href='Report01/';
-  } else {
-    document.getElementById('msg').textContent='Incorrect password';
-  }
-}
-</script>
+<h1>Fractis Studios — Support Reports</h1>
+<p>Select a report:</p>
+<ul>
+  <li><a href="Report01/">Report 01 — Security Audit (Fractis Studios)</a></li>
+</ul>
 </body>
 </html>
